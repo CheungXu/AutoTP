@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*- 
 
-Labels_path = 'H:\\Project\\AutoTP_Test4.6\\labels.txt'
-Result_path = 'H:\\Project\\AutoTP_Test4.6\\results.txt'
+Labels_path = 'E:\\TrafficSignData\\Testing\\labels.txt'
+Result_path = 'E:\\TrafficSignData\\Testing\\results.txt'
 
-TestAnalysis_path = 'H:\\Project\\AutoTP_Test4.6\\TestAnalysis.txt'
+TestAnalysis_path = 'E:\\TrafficSignData\\Testing\\TestAnalysis.txt'
 
 
 # --- read txt and make dir -------
