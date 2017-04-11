@@ -1,2 +1,0 @@
-# AutoTP
-Auto Testing Package;;;;
