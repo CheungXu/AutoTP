@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
-Labels_path = 'E:\\TrafficSignData\\Testing\\labels.txt'
-Result_path = 'E:\\TrafficSignData\\Testing\\results.txt'
-
-TestAnalysis_path = 'E:\\TrafficSignData\\Testing\\TestAnalysis.txt'
-
+# Labels_path = 'H:\\Project\\AutoTP_Test4.6\\labels.txt'
+# Result_path = 'H:\\Project\\AutoTP_Test4.6\\results.txt'
+# TestAnalysis_path = 'H:\\Project\\AutoTP_Test4.6\\TestAnalysis.txt'
 
 # --- read txt and make dir -------
 def make_dir(txt):
@@ -18,9 +16,10 @@ def make_dir(txt):
         txt_dir[keey] = []
         del temp[0]
         while (len(temp) != 0):
-            
+
             plist = temp[:4]
 
+            # about Error
             try:
                 plist = map(int,plist)
             except ValueError:
@@ -39,7 +38,7 @@ def get_area(thing):
 
 # -------- mp ----------
 def mp(label,result):
-    
+
     x_list = [label[0],label[0]+label[2],result[0],result[0]+result[2]]
     y_list = [label[1],label[1]+label[3],result[1],result[1]+result[3]]
     x_list.sort()
@@ -54,74 +53,82 @@ def mp(label,result):
     return rate
 
 # ---------- MAIN ----------
+def Analysis_Data(labelsPath,resultPath,testanalysisPath):
 
-Out_txt = open(TestAnalysis_path,'w')
+    Labels_path = labelsPath
+    Result_path = resultPath
+    TestAnalysis_path = testanalysisPath
 
-Labels_txt = open(Labels_path,'r')
-Result_txt = open(Result_path,'r')
+    Out_txt = open(TestAnalysis_path,'w')
 
-Labels_dir = {}
-Result_dir = {}
+    Labels_txt = open(Labels_path,'r')
+    Result_txt = open(Result_path,'r')
 
-Labels_dir = make_dir(Labels_txt)
-Result_dir = make_dir(Result_txt)
+    Labels_dir = {}
+    Result_dir = {}
 
-out_list = {}
+    Labels_dir = make_dir(Labels_txt)
+    Result_dir = make_dir(Result_txt)
 
-Labels_txt.close()
-Result_txt.close()
+    out_list = {}
 
-tempout_list =[]
-tlist = []
-mR = []
+    # --- close -----
+    Labels_txt.close()
+    Result_txt.close()
+
+    # --- temp ----
+    tempout_list =[]
+    tlist = []
 
 
-sortList = list(Result_dir.keys())
-sortList.sort()
+    # 哈希表
+    sortList = list(Result_dir.keys())
+    sortList.sort()
 
-for key in sortList:
-    if (key in Labels_dir and len(Result_dir[key]) != 0):
-        # ------- Precision -------
-        for ii in range(len(Result_dir[key])):
-            for iii in range(len(Labels_dir[key])):
-                mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
-                tempout_list.append(mprate)
-            tlist.append((max(tempout_list)))
-        
-        Precision = int( float(sum(tlist)/len(Result_dir[key])) * 100)
-        tempout_list = []
-        tlist = []
-        # -------- Recall --------
-        for iii in range(len(Labels_dir[key])):
+    for key in sortList:
+        if (key in Labels_dir and len(Result_dir[key]) != 0):
+
+            # ------- Precision -------
             for ii in range(len(Result_dir[key])):
-                mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
-                tempout_list.append(mprate)
-            
-            tlist.append((max(tempout_list)))
-        
-        Recall = int( float((sum(tlist)/len(Labels_dir[key]))) * 100)
-        tempout_list = []
-        tlist = []
-        # ---- write ---------
-        pic = str(key) + '.jpg' + ' '
-        Out_txt.write(pic)
-        data = str(Recall)+' '+str(Precision)
-        Out_txt.write(data)
-        Out_txt.write('\n')
+                for iii in range(len(Labels_dir[key])):
+                    mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
+                    tempout_list.append(mprate)
+                tlist.append((max(tempout_list)))
 
-        tempout_list =[]
+            Precision = int( float(sum(tlist)/len(Result_dir[key])) * 100)
+            tempout_list = []
+            tlist = []
 
-    else:
-        pic = str(key) + '.jpg' + ' '
-        Out_txt.write(pic)
-        data = '0'+' '+'0'+' '
-        Out_txt.write(data)
-        Out_txt.write('\n')
+            # -------- Recall --------
+            for iii in range(len(Labels_dir[key])):
+                for ii in range(len(Result_dir[key])):
+                    mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
+                    tempout_list.append(mprate)
 
-Out_txt.close()
+                tlist.append((max(tempout_list)))
 
-Result_dir.clear()
-Labels_dir.clear()
+            Recall = int( float((sum(tlist)/len(Labels_dir[key]))) * 100)
+            tempout_list = []
+            tlist = []
+            # ---- write ---------
+            pic = str(key) + '.jpg' + ' '
+            Out_txt.write(pic)
+            data = str(Recall)+' '+str(Precision)
+            Out_txt.write(data)
+            Out_txt.write('\n')
 
-print 'Over'
+            tempout_list =[]
+
+        else:
+            # ---- write ---------
+            pic = str(key) + '.jpg' + ' '
+            Out_txt.write(pic)
+            data = '0'+' '+'0'+' '
+            Out_txt.write(data)
+            Out_txt.write('\n')
+
+    # -- close ---
+    Out_txt.close()
+
+    print 'Over'
 
