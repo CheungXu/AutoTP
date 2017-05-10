@@ -95,7 +95,7 @@ def Analysis_Data(labelsPath,resultPath,testanalysisPath):
                     tempout_list.append(mprate)
                 tlist.append((max(tempout_list)))
 
-            Precision = int( float(sum(tlist)/len(Result_dir[key])) * 100)
+            Precision = float(int( sum(tlist)/len(Result_dir[key]) * 10000)) * 0.01
             tempout_list = []
             tlist = []
 
@@ -104,10 +104,9 @@ def Analysis_Data(labelsPath,resultPath,testanalysisPath):
                 for ii in range(len(Result_dir[key])):
                     mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
                     tempout_list.append(mprate)
-
                 tlist.append((max(tempout_list)))
 
-            Recall = int( float((sum(tlist)/len(Labels_dir[key]))) * 100)
+            Recall = float(int((sum(tlist)/len(Labels_dir[key])) * 10000)) * 0.01
             tempout_list = []
             tlist = []
             # ---- write ---------
@@ -131,4 +130,5 @@ def Analysis_Data(labelsPath,resultPath,testanalysisPath):
     Out_txt.close()
 
     print 'Over'
+
 
