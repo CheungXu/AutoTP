@@ -1,0 +1,9 @@
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\bin\Debug\netstandard2.0\AutoEvalueSharpLib.deps.json
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\bin\Debug\netstandard2.0\AutoEvalueSharpLib.dll
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\bin\Debug\netstandard2.0\AutoEvalueSharpLib.pdb
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\obj\Debug\netstandard2.0\AutoEvalueSharpLib.csprojResolveAssemblyReference.cache
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\obj\Debug\netstandard2.0\AutoEvalueSharpLib.csproj.CoreCompileInputs.cache
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\obj\Debug\netstandard2.0\AutoEvalueSharpLib.AssemblyInfoInputs.cache
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\obj\Debug\netstandard2.0\AutoEvalueSharpLib.AssemblyInfo.cs
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\obj\Debug\netstandard2.0\AutoEvalueSharpLib.dll
+E:\I\codes\Tasks\Machine Vision\AutoEvalueSharp\AutoEvalueSharpLib\obj\Debug\netstandard2.0\AutoEvalueSharpLib.pdb
