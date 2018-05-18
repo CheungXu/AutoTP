@@ -8,6 +8,7 @@ def RecJudge(correctRec, findRec):
 	"""
 		Rec :: [type,x,y,width,height]
 	"""
+
 	if correctRec[0] == findRec[0]:
 		findRec_center = [findRec[1] + 0.5 * findRec[3],findRec[2] + 0.5 * findRec[4]]
 		correctRec_range = [correctRec[1]-correctRec[3],
@@ -42,6 +43,7 @@ def ReadXML(XMLPath):
 			theList[int(ch.tag[5:10])].append(one_data)
 
 	return theList
+	
 if __name__ == '__main__':
 
 	# Right Number
