@@ -5,6 +5,8 @@
 # TestAnalysis_path = 'H:\\Project\\AutoTP_Test4.6\\TestAnalysis.txt'
 
 # --- read txt and make dir -------
+
+
 def make_dir(txt):
     txt_dir = {}
     for eachLine in txt.readlines():
@@ -16,12 +18,13 @@ def make_dir(txt):
         txt_dir[keey] = []
         del temp[0]
         while (len(temp) != 0):
+            
 
             plist = temp[:4]
 
             # about Error
             try:
-                plist = map(int,plist)
+                plist = map(int, plist)
             except ValueError:
                 break
 
@@ -32,37 +35,43 @@ def make_dir(txt):
     return txt_dir
 
 # -------- get area --------
+
+
 def get_area(thing):
     theArea = thing[2] * thing[3]
     return theArea
 
 # -------- mp ----------
-def mp(label,result):
 
-    x_list = [label[0],label[0]+label[2],result[0],result[0]+result[2]]
-    y_list = [label[1],label[1]+label[3],result[1],result[1]+result[3]]
+
+def mp(label, result):
+
+    x_list = [label[0], label[0] + label[2], result[0], result[0] + result[2]]
+    y_list = [label[1], label[1] + label[3], result[1], result[1] + result[3]]
     x_list.sort()
     y_list.sort()
     # 矩形的交面积
-    theAnd =float( (x_list[2]-x_list[1]) * (y_list[2]-y_list[1]))
+    theAnd = float((x_list[2] - x_list[1]) * (y_list[2] - y_list[1]))
     # 矩形的并面积
-    theOr = float((x_list[3]-x_list[0]) * (y_list[3]-y_list[0]))
+    theOr = float((x_list[3] - x_list[0]) * (y_list[3] - y_list[0]))
 
-    rate = float( theAnd / theOr )
+    rate = float(theAnd / theOr)
 
     return rate
 
 # ---------- MAIN ----------
-def Analysis_Data(labelsPath,resultPath,testanalysisPath):
+
+
+def Analysis_Data(labelsPath, resultPath, testanalysisPath):
 
     Labels_path = labelsPath
     Result_path = resultPath
     TestAnalysis_path = testanalysisPath
 
-    Out_txt = open(TestAnalysis_path,'w')
+    Out_txt = open(TestAnalysis_path, 'w')
 
-    Labels_txt = open(Labels_path,'r')
-    Result_txt = open(Result_path,'r')
+    Labels_txt = open(Labels_path, 'r')
+    Result_txt = open(Result_path, 'r')
 
     Labels_dir = {}
     Result_dir = {}
@@ -77,9 +86,8 @@ def Analysis_Data(labelsPath,resultPath,testanalysisPath):
     Result_txt.close()
 
     # --- temp ----
-    tempout_list =[]
+    tempout_list = []
     tlist = []
-
 
     # 哈希表
     sortList = list(Result_dir.keys())
@@ -91,38 +99,40 @@ def Analysis_Data(labelsPath,resultPath,testanalysisPath):
             # ------- Precision -------
             for ii in range(len(Result_dir[key])):
                 for iii in range(len(Labels_dir[key])):
-                    mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
+                    mprate = mp(Labels_dir[key][iii], Result_dir[key][ii])
                     tempout_list.append(mprate)
                 tlist.append((max(tempout_list)))
 
-            Precision = float(int( sum(tlist)/len(Result_dir[key]) * 10000)) * 0.01
+            Precision = float(
+                int(sum(tlist) / len(Result_dir[key]) * 10000)) * 0.01
             tempout_list = []
             tlist = []
 
             # -------- Recall --------
             for iii in range(len(Labels_dir[key])):
                 for ii in range(len(Result_dir[key])):
-                    mprate = mp(Labels_dir[key][iii],Result_dir[key][ii])
+                    mprate = mp(Labels_dir[key][iii], Result_dir[key][ii])
                     tempout_list.append(mprate)
                 tlist.append((max(tempout_list)))
 
-            Recall = float(int((sum(tlist)/len(Labels_dir[key])) * 10000)) * 0.01
+            Recall = float(
+                int((sum(tlist) / len(Labels_dir[key])) * 10000)) * 0.01
             tempout_list = []
             tlist = []
             # ---- write ---------
             pic = str(key) + '.jpg' + ' '
             Out_txt.write(pic)
-            data = str(Recall)+' '+str(Precision)
+            data = str(Recall) + ' ' + str(Precision)
             Out_txt.write(data)
             Out_txt.write('\n')
 
-            tempout_list =[]
+            tempout_list = []
 
         else:
             # ---- write ---------
             pic = str(key) + '.jpg' + ' '
             Out_txt.write(pic)
-            data = '0'+' '+'0'+' '
+            data = '0' + ' ' + '0' + ' '
             Out_txt.write(data)
             Out_txt.write('\n')
 
@@ -132,3 +142,5 @@ def Analysis_Data(labelsPath,resultPath,testanalysisPath):
     print 'Over'
 
 
+if __name__ == '__main__':
+    main()
