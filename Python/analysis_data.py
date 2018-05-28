@@ -87,7 +87,6 @@ def analysis_data(find_data,correct_data):
     correct_all_sum = correct_data.pop('ALL_SUM')
     n_TP = 0
 
-
     frame_list = list(correct_data.keys())
     frame_list.sort()
 
@@ -97,14 +96,23 @@ def analysis_data(find_data,correct_data):
     n_FP = abs(find_all_sum - n_TP)
     n_FN = abs(correct_all_sum - n_TP)
 
-    Precision = n_TP / (n_TP + n_FP)
-    Recall = n_TP / (n_TP + n_FN)
-
-    F_measure = (2 * Precision * Recall) / (Precision + Recall)
-
-    return (Precision,Recall,F_measure)
-
-
+    try:
+        Precision = n_TP / (n_TP + n_FP)
+    except ZeroDivisionError as e:
+        Precision = 0.0
+    try:
+        Recall = n_TP / (n_TP + n_FN)
+    except ZeroDivisionError as e:
+        Recall = 0.0
+    try:
+        F_measure = (2 * Precision * Recall) / (Precision + Recall)
+    except ZeroDivisionError as e:
+        F_measure = 0.0
+    if Precision*Recall == 0:
+        n_FN = 0
+        n_FP = 0
+        n_TP = 0
+    return (Precision,Recall,F_measure,n_TP,n_FP,n_FN)
 
 
 if __name__ == '__main__':
